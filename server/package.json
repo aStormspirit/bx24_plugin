@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd client && yarn build && cd .. && node server.js",
-    "watch": "parcel watch ./public/index.html"
+    "start:dev": "cd client && yarn build && cd .. && node server.js"
   },
   "keywords": [],
   "author": "",
