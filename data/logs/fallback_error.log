@@ -1,0 +1,2 @@
+2023/12/04 07:38:07 [error] 176#176: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:81", referrer: "http://localhost:81/"
+2023/12/04 07:38:50 [error] 176#176: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: nginxproxymanager, request: "POST /api/tokens HTTP/1.1", upstream: "http://127.0.0.1:3000/tokens", host: "localhost:81", referrer: "http://localhost:81/login"
