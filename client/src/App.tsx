@@ -1,61 +1,32 @@
-import {useState, useEffect} from 'react';
-import './App.css';
-import { BX24 } from "bx24";
-import axios from 'axios';
+import './App.css'
+import TokenForm from './components/TokenForm'
+import TokenList from './components/TokenList'
+import useCustomHook from "./utils/getUser"
 
 function App() {
-  const [auth, setAuth] = useState<any>();
-  const [user, setUser] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
-  
-  const urlParams = new URLSearchParams(window.location.search);
-  const baseUrl = `${urlParams.get("PROTOCOL") === "0" ? "https" : "http"}://${urlParams.get("DOMAIN")}`;
-  const bx24 = new BX24(window);
+  const auth = useCustomHook()
+  console.log(auth)
+  // if (isLoading) {
+  //   return <div>Loading...</div>
+  // }
 
-  useEffect(() => {
+  // if (isError) {
+  //   return <div>Error fetching user data</div>
+  // }
 
-    setLoading(true);
-    
-    bx24.getAuth()
-    .then(auth => {
-      axios.get(`https://mpkubatura.bitrix24.ru/rest/user.current?auth=${auth?.ACCESS_TOKEN}`)
-      .then(res => {
-        console.log(res.data.result);
-        setAuth(res.data.result);
-        setUser(res.data.result?.NAME); 
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-
-    setLoading(false);
-
-  }, []);
-
-  if(loading) {
-    return <div>Loading...</div>
-  }
-  
-
-    return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello {user}</h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  return (
+    <div className="bg-stone-300 h-full">
+      <div className="flex justify-center">
+        <header className="mt-[12px] w-1/2 bg-white rounded-lg text-[24px] flex justify-center">
+          <h1>Добро пожаловать, {1}</h1>
+        </header>
+      </div>
+      <div className="flex mt-[12px] justify-around">
+        <TokenForm />
+        <TokenList />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

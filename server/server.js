@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const www = process.env.WWW || './client/build';
+const www = process.env.WWW || '../client/build';
 
 app.use(express.static(www));
 
