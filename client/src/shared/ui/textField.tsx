@@ -16,9 +16,9 @@ export function UiTextField({
 }: UiTextFieldProps) {
   const id = useId()
   return (
-    <div className={clsx(className, 'flex flew-col gap-1')}>
+    <div className={clsx(className, 'space-y-2')}>
       {label && (
-        <label htmlFor={id} className="block">
+        <label htmlFor={id} className="block text-sm font-medium leading-none">
           {label}
         </label>
       )}
@@ -32,7 +32,7 @@ export function UiTextField({
         id={id}
         className={clsx(
           inputProps?.className,
-          'rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none'
+          'rounded border border-slate-300 focus:border-teal-600 px-2 h-10 w-full outline-none'
         )}
         type="text"
       />

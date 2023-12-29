@@ -2,6 +2,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 import { FaTelegram } from 'react-icons/fa'
 import { useState } from 'react'
 import Form from './Form'
+import { UiTextContainer } from '../entities/ui/textContainer'
 
 const TokenForm = () => {
   const [messanger, setMessanger] = useState(0)
@@ -9,14 +10,7 @@ const TokenForm = () => {
   return (
     <div>
       <div>
-        <div className="bg-purple-100 rounded-lg p-[10px]">
-          <h1 className="flex justify-center text-[24px]">
-            Как подключить Whatsapp или Telegram
-          </h1>
-          <p>1. Выберите WhatsApp или Telegram</p>
-          <p>2. Получите ваш Token ID и Hash</p>
-          <p>3. Добавьте их в ваш профиль</p>
-        </div>
+        <UiTextContainer />
         <div className="bg-emerald-100 rounded-lg flex flex-col justify-center mt-[20px] mb-[20px]">
           <p className="flex justify-center text-[24px]">
             WhatsApp или telegram
