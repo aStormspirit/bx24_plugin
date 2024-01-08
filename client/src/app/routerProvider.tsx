@@ -13,6 +13,6 @@ const router = createBrowserRouter([
   },
 ])
 
-export function Provider() {
+export function RouteProvider() {
   return <RouterProvider router={router} />
 }

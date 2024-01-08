@@ -24,3 +24,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+session_name.session
+__pycache__
+venv
+/telethon/venv

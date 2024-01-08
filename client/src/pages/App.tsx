@@ -1,5 +1,5 @@
 import TokenForm from '../widgets/TokenForm'
-import TokenList from '../widgets/TokenList'
+import TokenList from '../features/list/TokenList'
 
 function App() {
   return (
