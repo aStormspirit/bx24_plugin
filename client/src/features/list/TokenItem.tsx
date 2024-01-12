@@ -15,7 +15,7 @@ export default function TokenItem({
 
   return (
     <div
-      className={`rounded-lg border shadow-sm ${
+      className={`rounded-lg border shadow-sm mb-[20px] ${
         selected ? 'border-blue-500' : ''
       }`}
     >
@@ -25,7 +25,7 @@ export default function TokenItem({
         </h3>
         <UiButton
           onClick={() => dispatch(changeState(ID))}
-          className="w-[80px]"
+          className="w-[50%]"
           variant="secondary"
         >
           Выбрать

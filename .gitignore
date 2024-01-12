@@ -4,7 +4,7 @@
 /letsencrypt
 /nginx
 # dependencies
-/node_modules
+/server/node_modules
 /.pnp
 .pnp.js
 
@@ -24,7 +24,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-session_name.session
+.session
 __pycache__
 venv
 /telethon/venv

@@ -1,5 +1,6 @@
 import TokenForm from '../widgets/TokenForm'
 import TokenList from '../features/list/TokenList'
+import { UiLink } from '../shared/ui/link'
 
 function App() {
   return (
@@ -13,13 +14,14 @@ function App() {
         <TokenForm />
         <TokenList />
       </div>
-      <div>
-        <a
+      <div className="flex items-center justify-center pb-2">
+        <UiLink
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
           href="/chat"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          variant="primary"
         >
           Перейти в чат
-        </a>
+        </UiLink>
       </div>
     </div>
   )

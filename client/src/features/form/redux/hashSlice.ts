@@ -16,7 +16,7 @@ export const hashSlice = createSlice({
       const selectedObjectId = action.payload
 
       // Update the 'selected' property immutably
-      state.data = state.data.map((obj) =>
+      state.data = state.data.map((obj: any) =>
         obj.ID === selectedObjectId
           ? { ...obj, selected: true }
           : { ...obj, selected: false }

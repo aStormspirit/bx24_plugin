@@ -1,44 +1,46 @@
-import { useState } from 'react'
 import Form from '../features/form/Form'
 import { UiTextContainer } from '../entities/ui/textContainer'
+import { UiLink } from '../shared/ui/link'
 
 const TokenForm = () => {
-  const [messanger, setMessanger] = useState(0)
-
   return (
     <div className="flex flex-col gap-[36px]">
       <div>
-        <UiTextContainer />
+        <UiTextContainer
+          html={
+            <div className="p-2">
+              <h2 className="text-2xl font-bold mb-4">
+                Как подключить Telegram
+              </h2>
+              <p className="text-gray-700 mb-4">
+                1. Перейдите по{' '}
+                <UiLink variant="secondary" href="https://my.telegram.org/auth">
+                  ссылке
+                </UiLink>
+              </p>
+              <p className="text-gray-700 mb-4">
+                2. Получите ваш Token ID и Hash
+              </p>
+              <p className="text-gray-700 mb-4">3. Добавьте их в ваш профиль</p>
+            </div>
+          }
+        />
       </div>
       <Form />
-      <div className="rounded-lg bg-fuchsia-500 mt-[12px] mb-[20px] p-[10px]">
-        <h2>
-          В случае возникновения ошибок вы можете обратиться к разработчику
-          плагина
-        </h2>
-        <p>Telegram: @apollostrong</p>
-      </div>
+      <UiTextContainer
+        html={
+          <div className="p-2">
+            <h2 className="text-center">
+              {' '}
+              В случае возникновения ошибок вы можете обратиться к разработчику
+              плагина
+            </h2>
+            <p className="text-center">Telegram: @apollostrong</p>
+          </div>
+        }
+      />
     </div>
   )
 }
 
 export default TokenForm
-
-{
-  /* <div className="bg-emerald-100 rounded-lg flex flex-col justify-center mt-[20px] mb-[20px]">
-          <p className="flex justify-center text-[24px]">
-            WhatsApp или telegram
-          </p>
-
-          <div className="flex justify-evenly h-[80px] items-center">
-            <FaWhatsapp
-              onClick={() => setMessanger(0)}
-              className={`${messanger == 0 ? 'fill-green-500' : ''} scale-[3]`}
-            />
-            <FaTelegram
-              onClick={() => setMessanger(1)}
-              className={`${messanger == 1 ? 'fill-blue-500' : ''} scale-[3]`}
-            />
-          </div>
-        </div> */
-}

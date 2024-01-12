@@ -7,6 +7,7 @@ import { add } from './redux/hashSlice'
 type Inputs = {
   Hash: string
   ID: string
+  selected: boolean
 }
 
 const Form = () => {
@@ -14,7 +15,7 @@ const Form = () => {
 
   const dispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
+  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) =>
     dispatch(
       add({
         hash: data.Hash,
@@ -28,14 +29,14 @@ const Form = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-lg border bg-card text-card-foreground shadow-sm max-w-md mx-auto"
     >
-      <div className="flex flex-col space-y-1.5 p-6">
+      <div className="flex flex-col space-y-1.5 p-3">
         <h3 className="tracking-tight text-xl font-bold">
           Введить ваш Telegram ID и Hash
         </h3>
       </div>
-      <div className="p-6">
-        <div className="space-y-4">
-          <div className="space-y-2">
+      <div className="p-3">
+        <div className="space-y-2">
+          <div className="space-y-1">
             <UiTextField
               label="Telegram Hash"
               inputProps={{

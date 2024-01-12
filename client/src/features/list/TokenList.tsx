@@ -9,10 +9,10 @@ const TokenList = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2>Подключенные профили</h2>
+      <h2 className="mb-[10px]">Подключенные профили</h2>
       <div className="w-[480px]">
-        <div>
-          {data.map((el: ObjType, id) => (
+        <div className="h-[40vw] overflow-scroll">
+          {data.map((el: ObjType, id: number) => (
             <TokenItem
               key={id}
               hash={el.hash}
@@ -22,11 +22,18 @@ const TokenList = () => {
           ))}
         </div>
       </div>
-      <div>Выбранный профиль</div>
-      <div>
+    </div>
+  )
+}
+
+export default TokenList
+
+{
+  /* <div>Выбранный профиль</div>
+      <div className="w-100%">
         {data
           .filter((el: ObjType) => el.selected)
-          .map((el: ObjType, id) => (
+          .map((el: ObjType, id: number) => (
             <TokenItem
               key={id}
               hash={el.hash}
@@ -34,9 +41,5 @@ const TokenList = () => {
               selected={el.selected}
             />
           ))}
-      </div>
-    </div>
-  )
+      </div> */
 }
-
-export default TokenList
