@@ -4,8 +4,6 @@
 /letsencrypt
 /nginx
 # dependencies
-/server/node_modules
-/.pnp
 .pnp.js
 
 # testing

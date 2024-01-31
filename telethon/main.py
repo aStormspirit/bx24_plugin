@@ -25,14 +25,17 @@ async def get_code():
 @app.get('/sign-in')
 async def sign_in():
     phone_number = "+79516835376"
-    client = TelegramClient('session_name2', 15018163, "2adaf42efde89588dbc03473f44d63bd")
-    await client.start(phone=phone_number, code_callback=get_code)
-    return {"data": "output"}
+    session_name = 'vladimir'
+    api_id = 15018163
+    api_hash = "2adaf42efde89588dbc03473f44d63bd"
+    
+    with TelegramClient(session_name, api_id, api_hash) as client:
+        await client.start(phone=phone_number, code_callback=get_code)
 
 @app.get("/client")
 async def client():
     phone_number = "+79516835376"
-    client = TelegramClient('session_name', 26527851, "3487105350b815cd247ba22f6976d764")
+    client = TelegramClient('vladimir', 26527851, "3487105350b815cd247ba22f6976d764")
     await client.start(phone=phone_number)
     print(await client.get_me())
     output = ""
