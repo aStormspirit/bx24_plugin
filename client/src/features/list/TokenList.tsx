@@ -7,6 +7,8 @@ const TokenList = () => {
     (state: { store: HashSliceState }) => state.store.data
   )
 
+  console.log(data)
+
   return (
     <div className="flex flex-col items-center">
       <h2 className="mb-[10px]">Подключенные профили</h2>
