@@ -3,23 +3,20 @@ import { UiButton } from '../../shared/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { add } from './redux/hashSlice'
-
-type Inputs = {
-  Hash: string
-  ID: string
-  selected: boolean
-}
+import { ObjType } from '@src/shared/types'
 
 const Form = () => {
-  const { register, handleSubmit } = useForm<Inputs>()
+  const { register, handleSubmit } = useForm<ObjType>()
 
   const dispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) =>
+  const onSubmit: SubmitHandler<ObjType> = (data: ObjType) =>
     dispatch(
       add({
-        hash: data.Hash,
-        ID: data.ID,
+        number: data.number,
+        name: data.name,
+        hash: data.hash,
+        ID: Number(data.ID),
         selected: false,
       })
     )
@@ -36,12 +33,30 @@ const Form = () => {
       </div>
       <div className="p-3">
         <div className="space-y-2">
+        <div className="space-y-1">
+            <UiTextField
+              label="name"
+              inputProps={{
+                placeholder: 'Введите ваш name',
+                ...register('name'),
+              }}
+            />
+          </div>
+          <div className="space-y-1">
+            <UiTextField
+              label="number"
+              inputProps={{
+                placeholder: 'Введите ваш номер телефона',
+                ...register('number'),
+              }}
+            />
+          </div>
           <div className="space-y-1">
             <UiTextField
               label="Telegram Hash"
               inputProps={{
                 placeholder: 'Введите ваш Telegram Hash',
-                ...register('Hash'),
+                ...register('hash'),
               }}
             />
           </div>
@@ -50,6 +65,7 @@ const Form = () => {
               label="Telegram ID"
               inputProps={{
                 placeholder: 'Введите ваш Telegram ID',
+                pattern: "^[0-9]+$",
                 ...register('ID'),
               }}
             />

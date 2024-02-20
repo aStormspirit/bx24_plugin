@@ -1,16 +1,15 @@
 import { useDispatch } from 'react-redux'
 import { changeState } from '../form/redux/hashSlice'
 import { UiButton } from '../../shared/ui/button'
+import { ObjType } from '@src/shared/types'
 
 export default function TokenItem({
   hash,
   ID,
+  name,
+  number,
   selected,
-}: {
-  hash: string
-  ID: string
-  selected: boolean
-}) {
+}: ObjType) {
   const dispatch = useDispatch()
 
   return (
@@ -54,6 +53,30 @@ export default function TokenItem({
             placeholder="Identification Number"
             disabled={true}
             value={ID}
+          />
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-sm font-medium leading-none peer-disabled:opacity-70">
+            number
+          </label>
+          <input
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            id="number"
+            placeholder="number"
+            disabled={true}
+            value={number}
+          />
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-sm font-medium leading-none peer-disabled:opacity-70">
+            Name
+          </label>
+          <input
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            id="name"
+            placeholder="name"
+            disabled={true}
+            value={name}
           />
         </div>
       </div>

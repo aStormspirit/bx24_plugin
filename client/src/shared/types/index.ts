@@ -1,6 +1,8 @@
 export interface ObjType {
+  number: string
+  name: string
   hash: string
-  ID: string
+  ID: number
   selected: boolean
 }
 

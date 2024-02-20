@@ -12,7 +12,7 @@ export const hashSlice = createSlice({
     add: (state, action: PayloadAction<ObjType>) => {
       state.data.push(action.payload)
     },
-    changeState: (state, action: PayloadAction<string>) => {
+    changeState: (state, action: PayloadAction<number>) => {
       const selectedObjectId = action.payload
 
       // Update the 'selected' property immutably

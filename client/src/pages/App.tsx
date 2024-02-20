@@ -1,32 +1,34 @@
 import TokenForm from '../widgets/TokenForm'
 import TokenList from '../features/list/TokenList'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CodeForm from '../features/code/CodeForm'
-import WebSocketClient from '../entities/webSocket/WebSocketClient'
+import { HashSliceState, ObjType } from '@src/shared/types'
+import { useSelector } from 'react-redux'
 
 function App() {
   const [open, setOpen] = useState(false)
 
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8000/ws')
+  const data: ObjType[] = useSelector(
+    (state: { store: HashSliceState }) => state.store.data
+  )
+
+  const session = data.filter((el) => el.selected)[0]
+
+  function startSession(){
+    setOpen(!open)
+    const socket = new WebSocket('ws://localhost:8000/ws') // Укажите URL вашего WebSocket-сервера
 
     socket.onopen = () => {
       console.log('WebSocket connected')
       // Отправка данных на сервер
-      socket.send(JSON.stringify({ message: 'Hello WebSocket Server!' }))
+      socket.send(JSON.stringify(session))
     }
 
-    socket.onmessage = (event) => {
-      const messageFromServer = event.data
-      console.log('Received message from WebSocket server:', messageFromServer)
-      // Обработка полученных данных
+    socket.onclose = () => {
+      console.log('WebSocket disconnected')
     }
+  }
 
-    socket.onerror = (event) => {
-      // Обрабатываем ошибку со стороны сервера
-      console.log(event)
-    }
-  }, [])
 
   return (
     <div className="h-full">
@@ -41,14 +43,7 @@ function App() {
       </div>
       <div className="flex items-center justify-center pb-2">
         {open && <CodeForm setOpen={setOpen} />}
-        <button onClick={() => setOpen(!open)}>Чат</button>
-        {/* <UiLink
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
-          href="/chat"
-          variant="primary"
-        >
-          Перейти в чат
-        </UiLink> */}
+        <button onClick={() => startSession()}>Чат</button>
       </div>
     </div>
   )

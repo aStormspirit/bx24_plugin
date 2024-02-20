@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 const WebSocketClient = () => {
   // Создаем WebSocket-подключение
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8000') // Укажите URL вашего WebSocket-сервера
+    const socket = new WebSocket('ws://localhost:8000/ws') // Укажите URL вашего WebSocket-сервера
 
     // Обработчик события при открытии соединения
     socket.onopen = () => {

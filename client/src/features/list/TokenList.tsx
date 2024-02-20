@@ -7,8 +7,6 @@ const TokenList = () => {
     (state: { store: HashSliceState }) => state.store.data
   )
 
-  console.log(data)
-
   return (
     <div className="flex flex-col items-center">
       <h2 className="mb-[10px]">Подключенные профили</h2>
@@ -18,6 +16,8 @@ const TokenList = () => {
             <TokenItem
               key={id}
               hash={el.hash}
+              number={el.number}
+              name={el.name}
               ID={el.ID}
               selected={el.selected}
             />
@@ -29,19 +29,3 @@ const TokenList = () => {
 }
 
 export default TokenList
-
-{
-  /* <div>Выбранный профиль</div>
-      <div className="w-100%">
-        {data
-          .filter((el: ObjType) => el.selected)
-          .map((el: ObjType, id: number) => (
-            <TokenItem
-              key={id}
-              hash={el.hash}
-              ID={el.ID}
-              selected={el.selected}
-            />
-          ))}
-      </div> */
-}

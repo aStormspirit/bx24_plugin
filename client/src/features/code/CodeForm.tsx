@@ -1,19 +1,50 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UiInput from '../../shared/ui/Input'
 import { UiButton } from '../../shared/ui/button'
 import { UiLink } from '../../shared/ui/link'
+import { useForm, SubmitHandler } from 'react-hook-form'
 
-const CodeForm = ({ setOpen }: any) => {
+interface CodeFormProps {
+  setOpen: (open: boolean) => void
+}
+
+const CodeForm: React.FC<CodeFormProps> = ({ setOpen }) => {
   const [close, setClose] = useState(true)
+  const { register, handleSubmit } = useForm<any>()
+
+  const sendCode: SubmitHandler<{code: string}> = ({ code }) => {
+    const socket = new WebSocket('ws://localhost:8000/ws')
+    socket.onopen = () => {
+      console.log('WebSocket connected')
+      // Отправка данных на сервер
+      socket.send(JSON.stringify(code))
+    }
+  }
+
+  
+
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-600">
-      <div className="bg-white rounded-lg p-4 flex flex-col items-end">
+      <form
+        onSubmit={handleSubmit(sendCode)}
+        className="bg-white rounded-lg p-4 flex flex-col items-end"
+      >
         <div onClick={() => setOpen(false)}>
           <Close />
         </div>
-        <UiInput className="rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none" />
-        {close && <UiButton variant="primary">Отправить код</UiButton>}
-      </div>
+        <UiInput
+          inputProps={{
+            placeholder: 'Введите код',
+            ...register('code'),
+          }}
+          className="rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none"
+        />
+        {close && (
+          <UiButton variant="primary">
+            Отправить код
+          </UiButton>
+        )}
+      </form>
     </div>
   )
 }
