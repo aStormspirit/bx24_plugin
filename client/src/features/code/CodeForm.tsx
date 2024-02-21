@@ -6,19 +6,16 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface CodeFormProps {
   setOpen: (open: boolean) => void
+  sendMessage: (message: string) => void
 }
 
-const CodeForm: React.FC<CodeFormProps> = ({ setOpen }) => {
+const CodeForm: React.FC<CodeFormProps> = ({ setOpen, sendMessage }) => {
   const [close, setClose] = useState(true)
   const { register, handleSubmit } = useForm<any>()
 
   const sendCode: SubmitHandler<{code: string}> = ({ code }) => {
-    const socket = new WebSocket('ws://localhost:8000/ws')
-    socket.onopen = () => {
-      console.log('WebSocket connected')
-      // Отправка данных на сервер
-      socket.send(JSON.stringify(code))
-    }
+    sendMessage(JSON.stringify(code))
+        
   }
 
   

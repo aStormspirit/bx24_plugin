@@ -4,29 +4,34 @@ import { useState } from 'react'
 import CodeForm from '../features/code/CodeForm'
 import { HashSliceState, ObjType } from '@src/shared/types'
 import { useSelector } from 'react-redux'
+import useWebSocket from 'react-use-websocket';
 
 function App() {
-  const [open, setOpen] = useState(false)
-
   const data: ObjType[] = useSelector(
     (state: { store: HashSliceState }) => state.store.data
   )
 
+  const [open, setOpen] = useState(false)
+
   const session = data.filter((el) => el.selected)[0]
+  const socketUrl = 'ws://localhost:8000/ws'
+
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log('opened'),
+    //Will attempt to reconnect on all close events, such as server shutting down
+    shouldReconnect: (closeEvent) => true,
+  });
 
   function startSession(){
     setOpen(!open)
-    const socket = new WebSocket('ws://localhost:8000/ws') // Укажите URL вашего WebSocket-сервера
-
-    socket.onopen = () => {
-      console.log('WebSocket connected')
-      // Отправка данных на сервер
-      socket.send(JSON.stringify(session))
-    }
-
-    socket.onclose = () => {
-      console.log('WebSocket disconnected')
-    }
+    sendMessage(JSON.stringify(session))
   }
 
 
@@ -42,7 +47,7 @@ function App() {
         <TokenList />
       </div>
       <div className="flex items-center justify-center pb-2">
-        {open && <CodeForm setOpen={setOpen} />}
+        {open && <CodeForm setOpen={setOpen} sendMessage={sendMessage} />}
         <button onClick={() => startSession()}>Чат</button>
       </div>
     </div>
