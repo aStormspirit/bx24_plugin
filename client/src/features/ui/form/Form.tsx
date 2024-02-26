@@ -1,25 +1,18 @@
-import { UiTextField } from '../../shared/ui/textField'
-import { UiButton } from '../../shared/ui/button'
+import { UiTextField } from '../../../shared/ui/textField'
+import { UiButton } from '../../../shared/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { add } from './redux/hashSlice'
-import { ObjType } from '@src/shared/types'
+import { UserType } from '@src/shared/types'
+import useCreateUser from '../../model/useCreateUser'
 
 const Form = () => {
-  const { register, handleSubmit } = useForm<ObjType>()
+  const { register, handleSubmit, reset } = useForm<UserType>()
 
-  const dispatch = useDispatch()
+  const { mutation, createUser, isLoading } = useCreateUser()
 
-  const onSubmit: SubmitHandler<ObjType> = (data: ObjType) =>
-    dispatch(
-      add({
-        number: data.number,
-        name: data.name,
-        hash: data.hash,
-        ID: Number(data.ID),
-        selected: false,
-      })
-    )
+  const onSubmit: SubmitHandler<UserType> = (data: UserType) => {
+    createUser(data)
+    reset()
+  }
 
   return (
     <form
@@ -33,7 +26,7 @@ const Form = () => {
       </div>
       <div className="p-3">
         <div className="space-y-2">
-        <div className="space-y-1">
+          <div className="space-y-1">
             <UiTextField
               label="name"
               inputProps={{
@@ -56,7 +49,7 @@ const Form = () => {
               label="Telegram Hash"
               inputProps={{
                 placeholder: 'Введите ваш Telegram Hash',
-                ...register('hash'),
+                ...register('api_hash'),
               }}
             />
           </div>
@@ -65,8 +58,7 @@ const Form = () => {
               label="Telegram ID"
               inputProps={{
                 placeholder: 'Введите ваш Telegram ID',
-                pattern: "^[0-9]+$",
-                ...register('ID'),
+                ...register('api_id'),
               }}
             />
           </div>

@@ -1,29 +1,29 @@
+import { UiButton } from '../../../shared/ui/button'
+import { UserType } from '@src/shared/types'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { changeState } from '../form/redux/hashSlice'
-import { UiButton } from '../../shared/ui/button'
-import { ObjType } from '@src/shared/types'
+import { add } from '../../../redux/userSlice'
 
 export default function TokenItem({
-  hash,
-  ID,
+  api_hash,
+  api_id,
   name,
   number,
-  selected,
-}: ObjType) {
+}: UserType) {
+  const [selected, setSelected] = useState(false)
   const dispatch = useDispatch()
 
   return (
-    <div
-      className={`rounded-lg border shadow-sm mb-[20px] ${
-        selected ? 'border-blue-500' : ''
-      }`}
-    >
+    <div className={`rounded-lg border shadow-sm mb-[20px]`}>
       <div className="flex items-center justify-between p-1">
         <h3 className="text-2xl font-semibold leading-none tracking-tight">
           Профиль
         </h3>
         <UiButton
-          onClick={() => dispatch(changeState(ID))}
+          onClick={() => {
+            setSelected(!selected)
+            dispatch(add({ api_hash, api_id, name, number }))
+          }}
           className="w-[50%]"
           variant="secondary"
         >
@@ -40,7 +40,7 @@ export default function TokenItem({
             id="hash"
             placeholder="Unique Hash Identifier"
             disabled={true}
-            value={hash}
+            value={api_hash}
           />
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -52,7 +52,7 @@ export default function TokenItem({
             id="id"
             placeholder="Identification Number"
             disabled={true}
-            value={ID}
+            value={api_id}
           />
         </div>
         <div className="flex flex-col space-y-1.5">

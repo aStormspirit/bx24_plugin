@@ -1,39 +1,31 @@
 import TokenForm from '../widgets/TokenForm'
-import TokenList from '../features/list/TokenList'
+import TokenList from '../features/ui/list/TokenList'
 import { useState } from 'react'
-import CodeForm from '../features/code/CodeForm'
-import { HashSliceState, ObjType } from '@src/shared/types'
-import { useSelector } from 'react-redux'
-import useWebSocket from 'react-use-websocket';
+import CodeForm from '../features/ui/form/CodeForm'
 
 function App() {
-  const data: ObjType[] = useSelector(
-    (state: { store: HashSliceState }) => state.store.data
-  )
-
   const [open, setOpen] = useState(false)
 
-  const session = data.filter((el) => el.selected)[0]
+  // const session = data.filter((el) => el.selected)[0]
   const socketUrl = 'ws://localhost:8000/ws'
 
-  const {
-    sendMessage,
-    sendJsonMessage,
-    lastMessage,
-    lastJsonMessage,
-    readyState,
-    getWebSocket,
-  } = useWebSocket(socketUrl, {
-    onOpen: () => console.log('opened'),
-    //Will attempt to reconnect on all close events, such as server shutting down
-    shouldReconnect: (closeEvent) => true,
-  });
+  // const {
+  //   sendMessage,
+  //   sendJsonMessage,
+  //   lastMessage,
+  //   lastJsonMessage,
+  //   readyState,
+  //   getWebSocket,
+  // } = useWebSocket(socketUrl, {
+  //   onOpen: () => console.log('opened'),
+  //   //Will attempt to reconnect on all close events, such as server shutting down
+  //   shouldReconnect: (closeEvent) => true,
+  // })
 
-  function startSession(){
+  function startSession() {
     setOpen(!open)
-    sendMessage(JSON.stringify(session))
+    // sendMessage(JSON.stringify(session))
   }
-
 
   return (
     <div className="h-full">
@@ -47,7 +39,7 @@ function App() {
         <TokenList />
       </div>
       <div className="flex items-center justify-center pb-2">
-        {open && <CodeForm setOpen={setOpen} sendMessage={sendMessage} />}
+        {/* {open && <CodeForm setOpen={setOpen} sendMessage={} />} */}
         <button onClick={() => startSession()}>Чат</button>
       </div>
     </div>

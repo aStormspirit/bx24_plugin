@@ -1,11 +1,12 @@
-export interface ObjType {
+export interface UserType {
+  id?: string
   number: string
   name: string
-  hash: string
-  ID: number
-  selected: boolean
+  api_hash: string
+  api_id: string
+  selected?: boolean
 }
 
-export interface HashSliceState {
-  data: ObjType[]
+export interface UsersListType {
+  data: UserType[]
 }

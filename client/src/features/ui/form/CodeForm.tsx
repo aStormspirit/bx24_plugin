@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import UiInput from '../../shared/ui/Input'
-import { UiButton } from '../../shared/ui/button'
-import { UiLink } from '../../shared/ui/link'
+import UiInput from '../../../shared/ui/Input'
+import { UiButton } from '../../../shared/ui/button'
+import { UiLink } from '../../../shared/ui/link'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface CodeFormProps {
@@ -13,12 +13,9 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, sendMessage }) => {
   const [close, setClose] = useState(true)
   const { register, handleSubmit } = useForm<any>()
 
-  const sendCode: SubmitHandler<{code: string}> = ({ code }) => {
+  const sendCode: SubmitHandler<{ code: string }> = ({ code }) => {
     sendMessage(JSON.stringify(code))
-        
   }
-
-  
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-600">
@@ -36,11 +33,7 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, sendMessage }) => {
           }}
           className="rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none"
         />
-        {close && (
-          <UiButton variant="primary">
-            Отправить код
-          </UiButton>
-        )}
+        {close && <UiButton variant="primary">Отправить код</UiButton>}
       </form>
     </div>
   )

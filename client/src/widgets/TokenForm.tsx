@@ -1,5 +1,5 @@
-import Form from '../features/form/Form'
-import { UiTextContainer } from '../entities/ui/textContainer'
+import Form from '../features/ui/form/Form'
+import { UiTextContainer } from './textContainer'
 import { UiLink } from '../shared/ui/link'
 
 const TokenForm = () => {

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import hashSlice from '../features/form/redux/hashSlice'
+import hashSlice from './userSlice'
 
 export default configureStore({
   reducer: {
