@@ -2,29 +2,41 @@ import TokenForm from '../widgets/TokenForm'
 import TokenList from '../features/ui/list/TokenList'
 import { useState } from 'react'
 import CodeForm from '../features/ui/form/CodeForm'
+import { useSelector } from 'react-redux'
+import useWebSocket from 'react-use-websocket'
+import { useNavigate } from 'react-router-dom'
+import { UserType } from '@src/shared/types'
+
+type ReduxUserState = {
+  store: {
+    data: UserType[]
+  }
+}
 
 function App() {
   const [open, setOpen] = useState(false)
+  const config = useSelector((state: ReduxUserState) => state.store.data[0])
+  const navigate = useNavigate()
 
-  // const session = data.filter((el) => el.selected)[0]
   const socketUrl = 'ws://localhost:8000/ws'
 
-  // const {
-  //   sendMessage,
-  //   sendJsonMessage,
-  //   lastMessage,
-  //   lastJsonMessage,
-  //   readyState,
-  //   getWebSocket,
-  // } = useWebSocket(socketUrl, {
-  //   onOpen: () => console.log('opened'),
-  //   //Will attempt to reconnect on all close events, such as server shutting down
-  //   shouldReconnect: (closeEvent) => true,
-  // })
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log('opened'),
+    //Will attempt to reconnect on all close events, such as server shutting down
+    shouldReconnect: (closeEvent) => true,
+  })
 
   function startSession() {
     setOpen(!open)
-    // sendMessage(JSON.stringify(session))
+    sendMessage(JSON.stringify(config))
+    navigate('/chat')
   }
 
   return (

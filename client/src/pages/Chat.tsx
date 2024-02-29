@@ -1,6 +1,13 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
 const Chat = () => {
+  const { data, isLoading, error } = useQuery('repoData', () =>
+    fetch('http://localhost:8000/telegram/me').then((res) => res.json())
+  )
+
+  console.log(data)
+
   return (
     <div className="grid h-screen grid-cols-3 gap-4">
       <aside className="col-span-1 bg-gray-100 p-4">
