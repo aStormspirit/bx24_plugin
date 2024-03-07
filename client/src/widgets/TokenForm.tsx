@@ -1,4 +1,4 @@
-import Form from '../features/ui/form/Form'
+import Form from '../features/form/ui/Form'
 import { UiTextContainer } from './textContainer'
 import { UiLink } from '../shared/ui/link'
 

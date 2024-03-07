@@ -2,16 +2,24 @@ import { UiTextField } from '../../../shared/ui/textField'
 import { UiButton } from '../../../shared/ui/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserType } from '@src/shared/types'
-import useCreateUser from '../../model/useCreateUser'
+import useCreateUser from '../model/useCreateUser'
+import { useQueryClient } from 'react-query'
+import { queryClient } from '../../../shared/api/queryClient'
 
 const Form = () => {
   const { register, handleSubmit, reset } = useForm<UserType>()
+  const queryClient = useQueryClient()
+
+  const refetchData = () => {
+    queryClient.refetchQueries(['users'])
+  }
 
   const { mutation, createUser, isLoading } = useCreateUser()
 
   const onSubmit: SubmitHandler<UserType> = (data: UserType) => {
     createUser(data)
     reset()
+    refetchData()
   }
 
   return (

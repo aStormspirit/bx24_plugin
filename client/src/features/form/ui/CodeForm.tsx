@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import UiInput from '../../../shared/ui/Input'
 import { UiButton } from '../../../shared/ui/button'
-import { UiLink } from '../../../shared/ui/link'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface CodeFormProps {

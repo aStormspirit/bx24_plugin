@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import hashSlice from './userSlice'
+import userSlice from './userSlice'
+import dialogsSlice from './dialogSlice'
 
 export default configureStore({
   reducer: {
-    store: hashSlice,
+    telegram: dialogsSlice,
+    user: userSlice,
   },
 })

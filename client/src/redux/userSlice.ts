@@ -1,32 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UsersListType, UserType } from '@src/shared/types'
 
-const initialState: UsersListType = {
-  data: [],
+const initialState: any = {
+  config: [],
+  profile: [],
 }
 
 export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<UserType>) => {
-      state.data = [action.payload]
+    addConfig: (state, action: PayloadAction<UserType>) => {
+      state.config = [action.payload]
     },
-    changeState: (state, action: PayloadAction<string>) => {
-      const selectedObjectId = action.payload
-
-      state.data = state.data.map((obj: UserType) => {
-        if (obj.api_id === selectedObjectId) {
-          return { ...obj, selected: true }
-        } else {
-          return { ...obj, selected: false }
-        }
-      })
+    addProfile: (state, action: PayloadAction<any>) => {
+      state.profile = [action.payload]
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { add, changeState } = userSlice.actions
+export const { addConfig, addProfile } = userSlice.actions
 
 export default userSlice.reducer

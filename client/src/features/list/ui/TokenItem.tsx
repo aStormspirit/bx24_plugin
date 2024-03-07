@@ -1,8 +1,6 @@
 import { UiButton } from '../../../shared/ui/button'
 import { UserType } from '@src/shared/types'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { add } from '../../../redux/userSlice'
 
 export default function TokenItem({
   api_hash,
@@ -11,19 +9,27 @@ export default function TokenItem({
   number,
 }: UserType) {
   const [selected, setSelected] = useState(false)
-  const dispatch = useDispatch()
+
+  function addConfig() {
+    setSelected(!selected)
+    localStorage.setItem('api_hash', api_hash)
+    localStorage.setItem('api_id', api_id)
+    localStorage.setItem('name', name)
+    localStorage.setItem('number', number)
+  }
 
   return (
-    <div className={`rounded-lg border shadow-sm mb-[20px]`}>
+    <div
+      className={`rounded-lg border shadow-sm mb-[20px] ${
+        selected ? 'border-red-300' : ''
+      }`}
+    >
       <div className="flex items-center justify-between p-1">
         <h3 className="text-2xl font-semibold leading-none tracking-tight">
           Профиль
         </h3>
         <UiButton
-          onClick={() => {
-            setSelected(!selected)
-            dispatch(add({ api_hash, api_id, name, number }))
-          }}
+          onClick={() => addConfig()}
           className="w-[50%]"
           variant="secondary"
         >

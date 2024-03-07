@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from react import serve_react_app
 from fastapi.middleware.cors import CORSMiddleware
-from routes import router
+
+from routes import ws, user, telegram
+# Создайте экземпляр FastAPI
 
 app = FastAPI()
 
@@ -16,9 +18,13 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["Referer"],
+    expose_headers=["Referertelegram"],
 )
 
 path_to_react_app_build_dir = "./build"
-app.include_router(router)
+
+app.include_router(ws.router)
+app.include_router(telegram.router)
+app.include_router(user.router)
+
 app = serve_react_app(app, path_to_react_app_build_dir)

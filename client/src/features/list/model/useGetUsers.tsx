@@ -5,20 +5,22 @@ type GetUsers = {
   (): Promise<UsersListType>
 }
 
-const useGetUsers = () => {
-  const getUsers: GetUsers = () => {
-    return fetch('http://localhost:8000/users/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => data.data)
-  }
+const accountKey = ['users']
 
+const getUsers: GetUsers = () => {
+  return fetch('http://localhost:8000/users/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data.data)
+}
+
+const useGetUsers = () => {
   const { data, isLoading, isError, status, isFetched } = useQuery<any>(
-    'users',
+    accountKey,
     () => getUsers(),
     {
       retry: 0,

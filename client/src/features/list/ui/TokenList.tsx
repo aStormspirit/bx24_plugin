@@ -1,7 +1,7 @@
-import { UsersListType, UserType } from '@src/shared/types'
+import { UserType } from '@src/shared/types'
 import TokenItem from './TokenItem'
 import { useState, useEffect } from 'react'
-import useGetUsers from '../../model/useGetUsers'
+import useGetUsers from '../model/useGetUsers'
 import UiSpinner from '../../../shared/ui/spinner'
 
 const TokenList = () => {

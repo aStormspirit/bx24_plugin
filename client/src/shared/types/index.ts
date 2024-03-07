@@ -7,6 +7,17 @@ export interface UserType {
   selected?: boolean
 }
 
+export interface DialogType {
+  chat_id: string
+  chat_name: string
+}
+
+export type Profile = {
+  user_id: number
+  user_name: string
+  user_username: string
+}
+
 export interface UsersListType {
-  data: UserType[]
+  config: UserType[]
 }
