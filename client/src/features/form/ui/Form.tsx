@@ -8,18 +8,19 @@ import { queryClient } from '../../../shared/api/queryClient'
 
 const Form = () => {
   const { register, handleSubmit, reset } = useForm<UserType>()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
-  const refetchData = () => {
-    queryClient.refetchQueries(['users'])
-  }
+  // const refetchData = () => {
+  //   queryClient.refetchQueries(['users'])
+  // }
 
-  const { mutation, createUser, isLoading } = useCreateUser()
+  // const { mutation, createUser, isLoading } = useCreateUser()
 
   const onSubmit: SubmitHandler<UserType> = (data: UserType) => {
-    createUser(data)
+    // createUser(data)
+    console.log(data)
     reset()
-    refetchData()
+    // refetchData()
   }
 
   return (
