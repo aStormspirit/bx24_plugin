@@ -1,25 +1,38 @@
 import { useState } from 'react'
 import UiInput from '../../../shared/ui/Input'
 import { UiButton } from '../../../shared/ui/button'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import useWebSocket from 'react-use-websocket'
+import { UserType } from '@src/shared/types'
+import useCreateUser from '../model/useCreateUser'
 
 interface CodeFormProps {
   setOpen: (open: boolean) => void
-  sendMessage: (message: string) => void
+  data: UserType
 }
 
-const CodeForm: React.FC<CodeFormProps> = ({ setOpen, sendMessage }) => {
-  const [close, setClose] = useState(true)
-  const { register, handleSubmit } = useForm<any>()
+const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
+  // const [close, setClose] = useState(true)
+  // const { register, handleSubmit } = useForm<any>()
+  const { createUser } = useCreateUser()
+  const [code, setCode] = useState('')
+  const socketUrl = 'ws://localhost:8000/ws'
+  const { sendJsonMessage: send, lastMessage } = useWebSocket(socketUrl)
 
-  const sendCode: SubmitHandler<{ code: string }> = ({ code }) => {
-    sendMessage(JSON.stringify(code))
+  console.log(lastMessage?.data, 'lastMessage')
+
+  const sendData = () => {
+    send(data)
+  }
+
+  const sendCode = () => {
+    send(code)
+    createUser(data)
   }
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-600">
-      <form
-        onSubmit={handleSubmit(sendCode)}
+      <div
+        // onSubmit={handleSubmit(sendCode)}
         className="bg-white rounded-lg p-4 flex flex-col items-end"
       >
         <div onClick={() => setOpen(false)}>
@@ -28,12 +41,19 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, sendMessage }) => {
         <UiInput
           inputProps={{
             placeholder: 'Введите код',
-            ...register('code'),
+            onChange: (e) => {
+              setCode(e.target.value)
+            },
           }}
           className="rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none"
         />
-        {close && <UiButton variant="primary">Отправить код</UiButton>}
-      </form>
+        <UiButton onClick={() => sendData()} variant="primary">
+          Получить код
+        </UiButton>
+        <UiButton onClick={() => sendCode()} variant="primary">
+          Отправить код
+        </UiButton>
+      </div>
     </div>
   )
 }

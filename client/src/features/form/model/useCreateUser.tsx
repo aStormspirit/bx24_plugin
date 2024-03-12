@@ -1,6 +1,5 @@
 import { useMutation } from 'react-query'
 import { UserType } from '@src/shared/types'
-import { useQueryClient } from 'react-query'
 
 const accountKey = ['createUser']
 
@@ -15,8 +14,6 @@ function createUser(item: UserType) {
 }
 
 const useCreateUser = () => {
-  const queryClient = useQueryClient()
-
   const mutation = useMutation({
     mutationFn: createUser,
     mutationKey: accountKey,

@@ -1,6 +1,12 @@
 import time
 from functools import wraps
 from telethon.tl.types import Message
+import asyncio
+from telemongo import MongoSession
+from db.model import User
+from mongoengine import connect
+from telethon import TelegramClient
+from db.connect import MONGO_URL
 
 
 def timing(f):
@@ -13,12 +19,19 @@ def timing(f):
         return result
     return wrapper
 
+def get_client(user: User):
+    # connect('telegram', host=MONGO_URL)
+    # session = MongoSession(database='telegram')
+    if user:
+        return TelegramClient(session=user.name, api_id=user.api_id, api_hash=user.api_hash)
+    else:
+        raise Exception("User is not valid")
+
 async def get_chats(client):
     data = []
     try:
         async with client:
-            chats = client.iter_dialogs()
-            async for chat in chats:
+            async for chat in client.iter_dialogs():
                 chat_obj = {
                     'chat_id': chat.id,
                     'chat_name': chat.name
@@ -33,7 +46,8 @@ async def get_chats(client):
 async def get_me(client):
     try:
         async with client:
-            user = await client.get_me()
+            user = asyncio.create_task(client.get_me())
+            user = await user
     except Exception as e:
         raise e
         

@@ -25,7 +25,6 @@ async def read_user(user_id: int):
     return user
     
 
-#post
 @router.post("/",status_code=status.HTTP_201_CREATED)
 async def put_users(user: User):
     user_collection.insert_one(user.model_dump())

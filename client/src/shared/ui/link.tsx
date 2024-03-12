@@ -21,6 +21,8 @@ export function UiLink({ className, variant, ...props }: UiLinkProps) {
             'text-white disabled:opacity-50 hover:text-cyan-500 text-cyan-500',
         }[variant]
       )}
-    ></a>
+    >
+      1
+    </a>
   )
 }

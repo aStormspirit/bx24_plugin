@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom'
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<any>([])
   let { id } = useParams()
-  const { data, isLoading, isError, isFetched } = useGetMessage(id)
+  const { data, isFetched } = useGetMessage(id)
 
   useEffect(() => {
     if (data && isFetched) {
       setMessages(data)
     }
-  }, [isFetched])
+  }, [isFetched, data])
 
   console.log(messages)
 

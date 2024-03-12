@@ -4,10 +4,6 @@ import ChatItem from './ChatItem'
 import { DialogType } from '@src/shared/types'
 import UiSpinner from '../../../shared/ui/spinner'
 
-type DialogReduxType = {
-  dialogs: any
-}
-
 const ChatList: React.FC = () => {
   const [chats, setChats] = useState<DialogType[]>([])
   const { data, isLoading, isError, isFetched } = useGetDialogs()

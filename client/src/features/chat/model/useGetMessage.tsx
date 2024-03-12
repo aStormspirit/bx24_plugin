@@ -1,7 +1,4 @@
-import React from 'react'
 import { useQuery } from 'react-query'
-
-const accountKey = ['message']
 
 const getMessages = async (id: any) => {
   return fetch(`http://localhost:8000/telegram/dialog/${id}`, {

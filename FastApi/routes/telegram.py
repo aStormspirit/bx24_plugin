@@ -1,4 +1,4 @@
-from utils import get_chats, get_me, get_messages
+from utils import get_chats, get_me, get_messages, get_client
 from fastapi import APIRouter, HTTPException, Request
 import asyncio
 from db.model import User
@@ -6,18 +6,22 @@ from telethon import TelegramClient
 
 router = APIRouter(tags=['telegram'], prefix='/telegram')
 
-def get_client(user):
-    if user:
-        return TelegramClient(session=user.name, api_id=user.api_id, api_hash=user.api_hash)
-    else:
-        return {"error": "No user cookie found"}
 
+@router.post("/start")
+async def start(user: User):
+    client = TelegramClient(user.name, user.api_id, user.api_hash)
+    try:
+        await client.start(phone=user.number)
+    except Exception as e:
+        print(e)
+    finally:
+        return 'ok'
 
 @router.post("/me")
 async def get_user(user: User):
     try:
         client = get_client(user)
-        data = await get_me(client)
+        data = await get_me(client=client)
         return {"data": data}
     except Exception as error:
         print("An exception occurred: ", error)
@@ -27,7 +31,7 @@ async def get_user(user: User):
 async def get_dialogs(user: User):
     try:
         client = get_client(user)
-        dialogs = await get_chats(client)
+        dialogs = await get_chats(client=client)
         filtered_data = list(filter(lambda d: d['chat_name'] != "", dialogs))
         return {"data": filtered_data}
     except Exception as error:

@@ -19,7 +19,7 @@ const TokenList = () => {
 
       setUsers(users)
     }
-  }, [data])
+  }, [data, isFetched])
 
   return (
     <div className="flex flex-col items-center">

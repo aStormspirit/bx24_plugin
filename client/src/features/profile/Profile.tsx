@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
       setName(data.user_name)
       dispatch(addProfile(data))
     }
-  }, [data])
+  }, [data, dispatch, isFetched])
 
   if (isLoading) {
     return <div>Loading...</div>

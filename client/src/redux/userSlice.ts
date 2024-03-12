@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UsersListType, UserType } from '@src/shared/types'
+import { UserType } from '@src/shared/types'
 
 const initialState: any = {
   config: [],
