@@ -12,7 +12,6 @@ export default function UiLogo({ className }: { className?: string }) {
 export const Logo = ({ className }: { className?: string }) => {
   return (
     <svg
-      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"
@@ -20,7 +19,7 @@ export const Logo = ({ className }: { className?: string }) => {
     >
       <path
         fill="currentColor"
-        d="m1.33 19l-.6-1.036l4.33-2.5L7.103 19zm13.856 0H9.412l-3.619-6.268l4.33-2.5zm8.083 0h-5.774l-6.64-11.5l4.33-2.5z"
+        d="m20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001l-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15l4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434"
       />
     </svg>
   )
