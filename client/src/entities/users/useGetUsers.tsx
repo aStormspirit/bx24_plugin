@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query'
 import { UsersListType } from '@src/shared/types'
+import { API_URL } from '../../shared/api/routes'
 
 type GetUsers = {
   (): Promise<UsersListType>
@@ -8,7 +9,7 @@ type GetUsers = {
 const accountKey = ['users']
 
 const getUsers: GetUsers = () => {
-  return fetch('http://localhost:8000/users/', {
+  return fetch(API_URL + '/users/', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

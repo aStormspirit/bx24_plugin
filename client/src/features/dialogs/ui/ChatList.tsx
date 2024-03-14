@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useGetDialogs from '../model/useGetDialogs'
+import useGetDialogs from '../../../entities/gialogs/useGetDialogs'
 import ChatItem from './ChatItem'
 import { DialogType } from '@src/shared/types'
 import UiSpinner from '../../../shared/ui/spinner'

@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query'
-import { DialogType } from '../../../shared/types'
+import { DialogType } from '../../shared/types'
+import { API_URL } from '../../shared/api/routes'
 
 const accountKey = ['dialogs']
 
@@ -10,7 +11,7 @@ const useGetDialogs = () => {
   let api_hash = localStorage.getItem('api_hash')
 
   async function getDialogs(): Promise<{ data: DialogType[] }> {
-    const response = await fetch('http://localhost:8000/telegram/dialogs', {
+    const response = await fetch(API_URL + '/telegram/dialogs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

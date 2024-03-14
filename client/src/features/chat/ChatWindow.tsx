@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ChatMessage from './ChatMessage'
-import useGetMessage from './model/useGetMessage'
+import useGetMessage from '../../entities/gialogs/useGetMessage'
 import { useParams } from 'react-router-dom'
 
 const ChatWindow: React.FC = () => {

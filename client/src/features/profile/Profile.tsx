@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useGetProfile from './useGetProfile'
+import useGetProfile from '../../entities/users/useGetProfile'
 import { useDispatch } from 'react-redux'
 import { addProfile } from '../../redux/userSlice'
 

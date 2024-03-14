@@ -3,7 +3,7 @@ import UiInput from '../../../shared/ui/Input'
 import { UiButton } from '../../../shared/ui/button'
 import useWebSocket from 'react-use-websocket'
 import { UserType } from '@src/shared/types'
-import useCreateUser from '../model/useCreateUser'
+import useCreateUser from '../../../entities/users/useCreateUser'
 
 interface CodeFormProps {
   setOpen: (open: boolean) => void

@@ -1,10 +1,11 @@
 import { useQuery } from 'react-query'
 import { Profile } from '@src/shared/types/index'
+import { API_URL } from '../../shared/api/routes'
 
 const accountKey = ['profile']
 
 async function getProfile(): Promise<Profile> {
-  const response = await fetch('http://localhost:8000/telegram/me', {
+  const response = await fetch(API_URL + '/telegram/me', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

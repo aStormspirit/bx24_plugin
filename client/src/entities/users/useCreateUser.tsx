@@ -1,10 +1,11 @@
 import { useMutation } from 'react-query'
 import { UserType } from '@src/shared/types'
+import { API_URL } from '../../shared/api/routes'
 
 const accountKey = ['createUser']
 
 function createUser(item: UserType) {
-  return fetch('http://localhost:8000/users/', {
+  return fetch(API_URL + '/users/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
