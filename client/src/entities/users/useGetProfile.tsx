@@ -5,7 +5,7 @@ import { API_URL } from '../../shared/api/routes'
 const accountKey = ['profile']
 
 async function getProfile(): Promise<Profile> {
-  const response = await fetch(API_URL + '/telegram/me', {
+  const response = await fetch(`http://${API_URL}/telegram/me`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

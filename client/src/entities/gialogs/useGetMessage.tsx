@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import { API_URL } from '../../shared/api/routes'
 
 const getMessages = async (id: any) => {
-  return fetch(API_URL + `/telegram/dialog/${id}`, {
+  return fetch(`http://${API_URL}/telegram/dialog/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

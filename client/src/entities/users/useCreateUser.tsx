@@ -5,7 +5,7 @@ import { API_URL } from '../../shared/api/routes'
 const accountKey = ['createUser']
 
 function createUser(item: UserType) {
-  return fetch(API_URL + '/users/', {
+  return fetch(`http://${API_URL}/users/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

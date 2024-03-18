@@ -9,7 +9,7 @@ type GetUsers = {
 const accountKey = ['users']
 
 const getUsers: GetUsers = () => {
-  return fetch(API_URL + '/users/', {
+  return fetch(`http://${API_URL}/users/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

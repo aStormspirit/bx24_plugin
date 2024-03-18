@@ -11,7 +11,7 @@ const useGetDialogs = () => {
   let api_hash = localStorage.getItem('api_hash')
 
   async function getDialogs(): Promise<{ data: DialogType[] }> {
-    const response = await fetch(API_URL + '/telegram/dialogs', {
+    const response = await fetch(`http://${API_URL}/telegram/dialogs`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
