@@ -5,8 +5,6 @@ services:
     build:
       context: ./FastApi
       dockerfile: Dockerfile
-    volumes:
-      - react_build:/app/build # Мы используем volume здесь
     ports:
       - "8000:8000"
     networks:

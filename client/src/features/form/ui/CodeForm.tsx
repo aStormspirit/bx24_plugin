@@ -5,6 +5,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { UserType } from '@src/shared/types'
 import useCreateUser from '../../../entities/users/useCreateUser'
 import Sucsess from './Sucsess'
+import { API_URL } from '../../../shared/api/routes'
 
 interface CodeFormProps {
   setOpen: (open: boolean) => void
@@ -15,7 +16,7 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
   const { createUser } = useCreateUser()
   const [code, setCode] = useState('')
   const [button, setButton] = useState(false)
-  const socketUrl = 'ws://localhost:8000/ws'
+  const socketUrl = `ws://${API_URL}:8000/ws`
 
   const {
     sendJsonMessage: send,
