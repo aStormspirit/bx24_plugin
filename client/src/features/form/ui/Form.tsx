@@ -13,7 +13,7 @@ const Form = () => {
   const onSubmit: SubmitHandler<UserType> = (data: UserType) => {
     setData(data)
     setOpen(true)
-    reset()
+    // reset()
   }
 
   return (

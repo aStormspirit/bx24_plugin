@@ -3,13 +3,18 @@ from fastapi import APIRouter, HTTPException, Request
 import asyncio
 from db.model import User
 from telethon import TelegramClient
+from telemongo import MongoSession
+from telethon import TelegramClient
+from db.connect import MONGO_URL
+from mongoengine import connect
+
 
 router = APIRouter(tags=['telegram'], prefix='/telegram')
 
 
 @router.post("/start")
 async def start(user: User):
-    client = TelegramClient(user.name, user.api_id, user.api_hash)
+    client = get_client(user)
     try:
         await client.start(phone=user.number)
     except Exception as e:

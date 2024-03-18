@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import UiInput from '../../../shared/ui/Input'
 import { UiButton } from '../../../shared/ui/button'
-import useWebSocket from 'react-use-websocket'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { UserType } from '@src/shared/types'
 import useCreateUser from '../../../entities/users/useCreateUser'
+import Sucsess from './Sucsess'
 
 interface CodeFormProps {
   setOpen: (open: boolean) => void
@@ -11,26 +12,48 @@ interface CodeFormProps {
 }
 
 const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
-  // const [close, setClose] = useState(true)
-  // const { register, handleSubmit } = useForm<any>()
   const { createUser } = useCreateUser()
   const [code, setCode] = useState('')
+  const [button, setButton] = useState(false)
   const socketUrl = 'ws://localhost:8000/ws'
-  const { sendJsonMessage: send, lastMessage } = useWebSocket(socketUrl)
 
-  console.log(lastMessage?.data, 'lastMessage')
+  const {
+    sendJsonMessage: send,
+    lastMessage,
+    readyState,
+  } = useWebSocket(socketUrl)
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: 'Connecting',
+    [ReadyState.OPEN]: 'Open',
+    [ReadyState.CLOSING]: 'Closing',
+    [ReadyState.CLOSED]: 'Closed',
+    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+  }[readyState]
 
   const sendData = () => {
     send(data)
+    setButton(!button)
+    createUser(data)
   }
 
   const sendCode = () => {
     send(code)
-    createUser(data)
+  }
+
+  if (readyState === ReadyState.CLOSED && lastMessage?.data == 'Успешно') {
+    console.log(lastMessage)
+    setTimeout(() => {
+      setOpen(false)
+    }, 1000)
+    return <Sucsess />
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-600">
+    <div
+      className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center"
+      style={{ backgroundColor: 'rgba(75, 85, 99, 0.6)' }}
+    >
       <div
         // onSubmit={handleSubmit(sendCode)}
         className="bg-white rounded-lg p-4 flex flex-col items-end"
@@ -47,12 +70,15 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
           }}
           className="rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none"
         />
-        <UiButton onClick={() => sendData()} variant="primary">
-          Получить код
-        </UiButton>
-        <UiButton onClick={() => sendCode()} variant="primary">
-          Отправить код
-        </UiButton>
+        {button ? (
+          <UiButton onClick={() => sendCode()} variant="primary">
+            Отправить код
+          </UiButton>
+        ) : (
+          <UiButton onClick={() => sendData()} variant="primary">
+            Получить код
+          </UiButton>
+        )}
       </div>
     </div>
   )

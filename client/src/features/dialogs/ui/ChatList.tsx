@@ -8,8 +8,6 @@ const ChatList: React.FC = () => {
   const [chats, setChats] = useState<DialogType[]>([])
   const { data, isLoading, isError, isFetched } = useGetDialogs()
 
-  console.log(data)
-
   useEffect(() => {
     if (data) {
       setChats(data.data)

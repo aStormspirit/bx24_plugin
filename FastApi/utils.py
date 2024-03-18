@@ -2,12 +2,11 @@ import time
 from functools import wraps
 from telethon.tl.types import Message
 import asyncio
-from telemongo import MongoSession
 from db.model import User
-from mongoengine import connect
 from telethon import TelegramClient
 from db.connect import MONGO_URL
-
+from mongoengine import connect
+from telemongo import MongoSession
 
 def timing(f):
     @wraps(f)
@@ -20,10 +19,10 @@ def timing(f):
     return wrapper
 
 def get_client(user: User):
-    # connect('telegram', host=MONGO_URL)
-    # session = MongoSession(database='telegram')
+    connect()
+    session = MongoSession(host=MONGO_URL, database='telegram')
     if user:
-        return TelegramClient(session=user.name, api_id=user.api_id, api_hash=user.api_hash)
+        return TelegramClient(session=session, api_id=user.api_id, api_hash=user.api_hash)
     else:
         raise Exception("User is not valid")
 

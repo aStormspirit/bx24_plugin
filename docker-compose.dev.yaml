@@ -1,6 +1,15 @@
 version: "3"
 
 services:
+  react:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - react_build:/app/build # Мы используем volume здесь
+    # После сборки React приложения контейнер уже не нужен, поэтому можем его завершить
+    command: ["true"] # Это дефолтная команда, которая завершит контейнер после сборки
+
   fastapi:
     build:
       context: ./FastApi
@@ -27,4 +36,5 @@ networks:
   app_network:
 
 volumes:
+  react_build:
   mongodb_data_container:

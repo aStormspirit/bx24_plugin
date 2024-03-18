@@ -14,8 +14,6 @@ const ChatWindow: React.FC = () => {
     }
   }, [isFetched, data])
 
-  console.log(messages)
-
   return (
     <>
       <div

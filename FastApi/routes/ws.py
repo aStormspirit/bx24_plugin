@@ -46,25 +46,39 @@ router = APIRouter()
 async def websocket_endpoint(websocket: WebSocket):
     try:
         await websocket.accept()
+        # print('Подключился')
         data = await websocket.receive_json()
         config = User(**data)
 
+
+        # print(data)
+
         async def code():
            code = await websocket.receive_text()
-           print('2')
+        #    print('2')
            return code
         
-        client = get_client(config)
-        await client.start(phone=config.number, code_callback=code)
-        await websocket.send_text("Успешно")
+        try:
+            client = get_client(config)
+        except Exception as e:
+            print(e)
+            await websocket.send_json({'error': 'Invalid config'})
+            await websocket.close()
+            return
         
-    except RuntimeError:
+        await client.start(phone=config.number, code_callback=code)
+        # print(await client.get_me())
+        
+    except RuntimeError as re:
+        print(re)
         pass
-    except WebSocketDisconnect:
+    except WebSocketDisconnect as wsd:
+        print(wsd)
         pass
 
     finally:
         try:
+            await websocket.send_text("Успешно")
             await websocket.close()
         except RuntimeError:
             pass

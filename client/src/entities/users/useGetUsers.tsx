@@ -20,15 +20,12 @@ const getUsers: GetUsers = () => {
 }
 
 const useGetUsers = () => {
-  const { data, isLoading, isError, status, isFetched } = useQuery<any>(
-    accountKey,
-    () => getUsers(),
-    {
+  const { data, isLoading, isError, status, isFetched, refetch } =
+    useQuery<any>(accountKey, () => getUsers(), {
       retry: 0,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
-    }
-  )
+    })
 
   return { data, isLoading, isError, status, isFetched }
 }

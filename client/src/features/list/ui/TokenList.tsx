@@ -1,14 +1,16 @@
 import { UserType } from '@src/shared/types'
+import { useState } from 'react'
 import TokenItem from './TokenItem'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import useGetUsers from '../../../entities/users/useGetUsers'
 import UiSpinner from '../../../shared/ui/spinner'
 
 const TokenList = () => {
-  const [users, setUsers] = useState<UserType[]>([])
   const { data, isLoading, isError, isFetched } = useGetUsers()
+  const [users, setUsers] = useState<UserType[]>([])
 
   useEffect(() => {
+    console.log(1)
     if (data && isFetched) {
       const users = data.map((el: UserType) => {
         return {
@@ -16,7 +18,6 @@ const TokenList = () => {
           selected: false,
         }
       })
-
       setUsers(users)
     }
   }, [data, isFetched])
