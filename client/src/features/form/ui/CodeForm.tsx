@@ -16,7 +16,7 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
   const { createUser } = useCreateUser()
   const [code, setCode] = useState('')
   const [button, setButton] = useState(false)
-  const socketUrl = `ws://${API_URL}:8000/ws`
+  const socketUrl = `ws://${API_URL}/ws`
 
   const {
     sendJsonMessage: send,
