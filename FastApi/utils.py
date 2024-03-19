@@ -19,7 +19,7 @@ def timing(f):
     return wrapper
 
 def get_client(user: User):
-    connect()
+    connect(host=MONGO_URL)
     session = MongoSession(host=MONGO_URL, database='telegram')
     if user:
         return TelegramClient(session=session, api_id=user.api_id, api_hash=user.api_hash)
