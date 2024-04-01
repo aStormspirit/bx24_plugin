@@ -14,7 +14,6 @@ export const dialogSlice = createSlice({
   initialState,
   reducers: {
     addDialogs: (state, action: PayloadAction<any>) => {
-      console.log(action.payload)
       state.dialogs = [action.payload]
     },
   },

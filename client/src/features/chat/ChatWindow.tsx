@@ -16,10 +16,7 @@ const ChatWindow: React.FC = () => {
 
   return (
     <>
-      <div
-        className="rounded-lg border bg-card text-card-foreground shadow-sm flex-1 overflow-y-scroll"
-        data-v0-t="card"
-      >
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm flex-1 overflow-y-scroll">
         <div className="p-6 space-y-4">
           {messages.map((message: any) => (
             <ChatMessage key={message.messageid} message={message.message} />

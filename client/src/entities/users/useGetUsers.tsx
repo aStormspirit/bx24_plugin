@@ -1,22 +1,10 @@
 import { useQuery } from 'react-query'
-import { UsersListType } from '@src/shared/types'
-import { API_URL } from '../../shared/api/routes'
-
-type GetUsers = {
-  (): Promise<UsersListType>
-}
+import { authInstance } from '../../shared/api/api-instance'
 
 const accountKey = ['users']
 
-const getUsers: GetUsers = () => {
-  return fetch(`http://${API_URL}/users/`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => data.data)
+const getUsers: any = () => {
+  return authInstance.get('/users/').then((res) => res.data.data)
 }
 
 const useGetUsers = () => {

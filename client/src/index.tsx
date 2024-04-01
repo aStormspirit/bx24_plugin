@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import './tailwind.css'
 import { QueryProvider } from './app/queryProvider'
 import { RouteProvider } from './app/routerProvider'
 import store from './redux/store'

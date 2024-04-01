@@ -51,10 +51,7 @@ const CodeForm: React.FC<CodeFormProps> = ({ setOpen, data }) => {
   }
 
   return (
-    <div
-      className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center"
-      style={{ backgroundColor: 'rgba(75, 85, 99, 0.6)' }}
-    >
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-600/50">
       <div
         // onSubmit={handleSubmit(sendCode)}
         className="bg-white rounded-lg p-4 flex flex-col items-end"

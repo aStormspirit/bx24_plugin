@@ -10,7 +10,6 @@ const TokenList = () => {
   const [users, setUsers] = useState<UserType[]>([])
 
   useEffect(() => {
-    console.log(1)
     if (data && isFetched) {
       const users = data.map((el: UserType) => {
         return {

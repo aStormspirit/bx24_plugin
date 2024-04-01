@@ -18,11 +18,11 @@ export function UiLink({ className, variant, ...props }: UiLinkProps) {
           primary:
             'bg-black text-white shadow hover:bg-gray-900 disabled:opacity-50 shadow-black-500/30',
           secondary:
-            'text-white disabled:opacity-50 hover:text-cyan-500 text-cyan-500',
+            'text-black disabled:opacity-50 hover:text-cyan-700 underline',
         }[variant]
       )}
     >
-      1
+      {props.children}
     </a>
   )
 }

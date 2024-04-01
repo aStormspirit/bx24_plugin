@@ -27,3 +27,5 @@ __pycache__
 venv
 /telethon/venv
 *.session
+/certs
+/FastApi/certs

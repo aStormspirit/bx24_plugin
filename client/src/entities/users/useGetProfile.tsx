@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import { Profile } from '@src/shared/types/index'
 import { API_URL } from '../../shared/api/routes'
+import { instance } from '../../shared/api/api-instance'
 
 const accountKey = ['profile']
 

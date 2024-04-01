@@ -17,7 +17,3 @@ export type Profile = {
   user_name: string
   user_username: string
 }
-
-export interface UsersListType {
-  config: UserType[]
-}
