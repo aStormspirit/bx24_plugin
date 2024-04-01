@@ -1,7 +1,7 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, status, WebSocketException
 from telethon import TelegramClient
-from db.model import User
-from utils import get_client
+from db.model import UserTG
+from core.utils import get_client
 import asyncio
 
 router = APIRouter()
@@ -48,7 +48,7 @@ async def websocket_endpoint(websocket: WebSocket):
         await websocket.accept()
         # print('Подключился')
         data = await websocket.receive_json()
-        config = User(**data)
+        config = UserTG(**data)
 
 
         # print(data)

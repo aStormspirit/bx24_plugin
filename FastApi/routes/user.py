@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 from db.connect import user_collection
 from db.shemas import list_serial
-from db.model import User
+from db.model import UserTG
 
 router = APIRouter(tags=["users"], prefix="/users")
 
@@ -26,6 +26,6 @@ async def read_user(user_id: int):
     
 
 @router.post("/",status_code=status.HTTP_201_CREATED)
-async def put_users(user: User):
+async def put_users(user: UserTG):
     user_collection.insert_one(user.model_dump())
     return {"data": user}

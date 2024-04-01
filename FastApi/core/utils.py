@@ -2,7 +2,7 @@ import time
 from functools import wraps
 from telethon.tl.types import Message
 import asyncio
-from db.model import User
+from db.model import UserTG
 from telethon import TelegramClient
 from db.connect import MONGO_URL
 from mongoengine import connect
@@ -18,7 +18,7 @@ def timing(f):
         return result
     return wrapper
 
-def get_client(user: User):
+def get_client(user: UserTG):
     connect(host=MONGO_URL)
     session = MongoSession(host=MONGO_URL, database='telegram')
     if user:
