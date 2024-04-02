@@ -2,16 +2,22 @@ version: "3"
 
 services:
   react:
-    image: ./client
+    # image: ./client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     volumes:
       - react_build:/app/build # Мы используем volume здесь
     # После сборки React приложения контейнер уже не нужен, поэтому можем его завершить
     command: ["true"] # Это дефолтная команда, которая завершит контейнер после сборки
     environment:
-      - API_URL=localhost:8000
+      - API_URL=fastapi:8000
 
   fastapi:
-    image: ./FastApi
+    # image: ./FastApi
+    build:
+      context: ./FastApi
+      dockerfile: Dockerfile
     volumes:
       - react_build:/app/build # Мы используем volume здесь
     ports:
@@ -21,8 +27,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - API_URL=localhost:8000
-      - MONGO_HOST=localhost
+      - MONGO_HOST=mongo
 
   mongo:
     image: mongo

@@ -13,6 +13,8 @@ RUN pip install -r requirements.txt
 # Копируем исходный код в рабочую директорию
 COPY . .
 
+RUN openssl genrsa -out certs/jwt-private.pem 2048 && openssl rsa -in certs/jwt-private.pem -outform PEM -pubout -out certs/jwt-public.pem
+
 # Экспозируем порт
 EXPOSE 8000
 

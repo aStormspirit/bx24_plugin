@@ -1,9 +1,9 @@
 import pymongo
-from dotenv import dotenv_values
+import os
 
-config = dotenv_values(".env")
+host = os.environ.get('MONGO_HOST', "localhost")
 
-MONGO_URL = f"mongodb://localhost:27017"
+MONGO_URL = f"mongodb://{host}:27017"
 
 client = pymongo.MongoClient(MONGO_URL)
 database = client.users

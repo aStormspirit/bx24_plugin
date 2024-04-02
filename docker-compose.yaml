@@ -11,6 +11,8 @@ services:
       - app_network
     depends_on:
       - mongo
+    environment:
+      - MONGO_HOST=mongo
 
   mongo:
     image: mongo
