@@ -11,7 +11,7 @@ services:
       - API_URL=fastapi:8000
 
   fastapi:
-    image: ./FastApi
+    image: jedaiok/bx24_fastapi:python
     volumes:
       - react_build:/app/build # Мы используем volume здесь
     ports:
