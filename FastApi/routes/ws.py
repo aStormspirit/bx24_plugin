@@ -59,7 +59,7 @@ async def websocket_endpoint(websocket: WebSocket):
            return code
         
         try:
-            client = get_client(config)
+            client = get_client(api_hash=config.api_hash, api_id=config.api_id)
         except Exception as e:
             print(e)
             await websocket.send_json({'error': 'Invalid config'})

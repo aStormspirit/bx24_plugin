@@ -18,11 +18,11 @@ def timing(f):
         return result
     return wrapper
 
-def get_client(user: UserTG):
+def get_client(api_id, api_hash):
     connect(host=MONGO_URL)
     session = MongoSession(host=MONGO_URL, database='telegram')
-    if user:
-        return TelegramClient(session=session, api_id=user.api_id, api_hash=user.api_hash)
+    if api_hash and api_id:
+        return TelegramClient(session=session, api_id=api_id, api_hash=api_hash)
     else:
         raise Exception("User is not valid")
 
@@ -56,11 +56,11 @@ async def get_me(client):
         'user_username': user.username
     }
 
-async def get_messages(client, chat_id):
+async def get_messages(client, chat_id, offset):
     data = []
     async with client:
-        async for message in client.iter_messages(chat_id, limit=10, offset_id=0):
-            if isinstance(message, Message) and message.media is None:
+        async for message in client.iter_messages(chat_id, limit=5, offset_id=offset):
+            if isinstance(message, Message):
 
                 me = False
                 if message.from_id is not None: # если from_id не None
@@ -69,6 +69,7 @@ async def get_messages(client, chat_id):
                 message_obj = {
                     'message_id': message.id,
                     'message': message.message,
+                    'date':  message.date,
                     "me": me
                 }
                 data.append(message_obj)

@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query'
-import { authInstance } from '../../shared/api/api-instance'
+import { instance } from '../../shared/api/api-instance'
 
 const accountKey = ['users']
 
 const getUsers: any = () => {
-  return authInstance.get('/users/').then((res) => res.data.data)
+  return instance.get('users/').then((res) => res.data.data)
 }
 
 const useGetUsers = () => {

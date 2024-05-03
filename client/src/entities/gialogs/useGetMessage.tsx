@@ -1,28 +1,18 @@
 import { useQuery } from 'react-query'
-import { API_URL } from '../../shared/api/routes'
+import { authInstance } from '../../shared/api/api-instance'
 
-const getMessages = async (id: any) => {
-  return fetch(`http://${API_URL}/telegram/dialog/${id}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: localStorage.getItem('name'),
-      number: localStorage.getItem('number'),
-      api_id: localStorage.getItem('api_id'),
-      api_hash: localStorage.getItem('api_hash'),
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => data.data)
-    .catch((err) => console.log(err))
+const getMessages = async (id: string | undefined, offset: number) => {
+  return authInstance
+    .post(`/telegram/dialog/${id}/`, {
+      offset,
+    })
+    .then((res) => res.data.data)
 }
 
-const useGetMessage = (id: any) => {
-  const { data, isLoading, isError, isFetched } = useQuery(
+const useGetMessage = (id: string | undefined, offset: number) => {
+  const { data, isLoading, isError, isFetched, refetch } = useQuery(
     ['account', id],
-    () => getMessages(id),
+    () => getMessages(id, offset),
     {
       retry: 1,
       refetchOnWindowFocus: false,
@@ -30,7 +20,7 @@ const useGetMessage = (id: any) => {
     }
   )
 
-  return { data, isLoading, isError, isFetched }
+  return { data, isLoading, isError, isFetched, refetch }
 }
 
 export default useGetMessage

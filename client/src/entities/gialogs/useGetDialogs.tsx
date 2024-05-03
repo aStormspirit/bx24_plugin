@@ -1,37 +1,21 @@
 import { useQuery } from 'react-query'
 import { DialogType } from '../../shared/types'
-import { API_URL } from '../../shared/api/routes'
+import { authInstance } from '../../shared/api/api-instance'
 
 const accountKey = ['dialogs']
 
 const useGetDialogs = () => {
-  let name = localStorage.getItem('name')
-  let number = localStorage.getItem('number')
-  let api_id = localStorage.getItem('api_id')
-  let api_hash = localStorage.getItem('api_hash')
-
   async function getDialogs(): Promise<{ data: DialogType[] }> {
-    const response = await fetch(`http://${API_URL}/telegram/dialogs`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        number: number,
-        api_id: api_id,
-        api_hash: api_hash,
-      }),
-    })
+    const response = await authInstance.post(`/telegram/dialogs`)
 
-    // Проверка статуса ответа
-    if (!response.ok) {
-      // Можно добавить дополнительную проверку здесь для других кодов статуса,
-      // если вы хотите обрабатывать их по-разному
-      throw new Error(`Ошибка: ${response.status}`)
-    }
+    // // Проверка статуса ответа
+    // if (!response.ok) {
+    //   // Можно добавить дополнительную проверку здесь для других кодов статуса,
+    //   // если вы хотите обрабатывать их по-разному
+    //   throw new Error(`Ошибка: ${response.status}`)
+    // }
 
-    return response.json()
+    return response.data
   }
 
   const { data, isLoading, isError, status, isFetched } = useQuery<{

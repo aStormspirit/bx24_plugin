@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 class UserTG(BaseModel):
@@ -9,3 +10,9 @@ class UserTG(BaseModel):
 class UserSchema(BaseModel):
     login: str
     password: bytes
+
+class OffsetSchema(BaseModel):
+    offset: int
+
+class Message(BaseModel):
+    message: str

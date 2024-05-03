@@ -1,6 +1,7 @@
 import { UiButton } from '../../../shared/ui/button'
 import { UserType } from '@src/shared/types'
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 
 export default function TokenItem({
   api_hash,
@@ -9,13 +10,16 @@ export default function TokenItem({
   number,
 }: UserType) {
   const [selected, setSelected] = useState(false)
+  const [cookies, setCookie] = useCookies(['api_id', 'api_hash'])
 
   function addConfig() {
     setSelected(!selected)
-    localStorage.setItem('api_hash', api_hash)
-    localStorage.setItem('api_id', api_id)
-    localStorage.setItem('name', name)
-    localStorage.setItem('number', number)
+    setCookie('api_id', api_id)
+    setCookie('api_hash', api_hash)
+    // localStorage.setItem('api_hash', api_hash)
+    // localStorage.setItem('api_id', api_id)
+    // localStorage.setItem('name', name)
+    // localStorage.setItem('number', number)
   }
 
   return (
