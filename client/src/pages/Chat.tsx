@@ -1,5 +1,6 @@
 import React from 'react'
 import ChatList from '../features/dialogs/ui/ChatList'
+import { AddChat } from '../features/chat/AddChat'
 import { Outlet } from 'react-router-dom'
 import Profile from '../features/profile/Profile'
 
@@ -10,6 +11,7 @@ const Chat: React.FC = () => {
         <Profile />
         <h3 className="font-semibold mb-2">Чаты</h3>
         <ChatList />
+        <AddChat />
       </aside>
       <main className="col-span-2 p-4 flex flex-col">
         <Outlet />

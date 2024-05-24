@@ -1,6 +1,6 @@
 from core.utils import get_chats, get_me, get_messages, get_client
 from fastapi import APIRouter, HTTPException, Request
-from db.model import UserTG, OffsetSchema, Message
+from db.model import UserTG, OffsetSchema, Message, ChatName
 from telethon.tl.functions.messages import CreateChatRequest
 
 router = APIRouter(tags=['telegram'], prefix='/telegram')
@@ -48,11 +48,11 @@ async def get_dialogs(request: Request, chat_id: int, offset: OffsetSchema):
         raise HTTPException(status_code=404, detail="dialogs not found")
     
 @router.post("/create_chat")
-async def create_chat_with_vendor(request: Request):
+async def create_chat_with_vendor(request: Request, chat_name: str):
     try:
         client = get_client(api_id=request.cookies['api_id'], api_hash=request.cookies['api_hash'])
         async with client:
-            result = await client(CreateChatRequest(users=["@kubaturaAdmin", "@Kubatura_Bot"], title='База диванов'))
+            result = await client(CreateChatRequest(users=["@kubaturaAdmin", "@Kubatura_Bot"], title=chat_name))
             chat_id = result.chats[0].id
             await client.send_message(chat_id, f'-{chat_id} Здравствуйте, это группа куда бот будет присылать информацию о заказах с маркетплейса Кубатура.ру')
         return {"data": result}
@@ -62,7 +62,6 @@ async def create_chat_with_vendor(request: Request):
     
 @router.post("/send_message")
 async def send_message(request: Request, chat_id: int, message: Message):
-    print(message.message)
     try:
         client = get_client(api_id=request.cookies['api_id'], api_hash=request.cookies['api_hash'])
         async with client:

@@ -16,3 +16,6 @@ class OffsetSchema(BaseModel):
 
 class Message(BaseModel):
     message: str
+
+class ChatName(BaseModel):
+    name: str
